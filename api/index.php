@@ -7,7 +7,8 @@
 
 	try {
 	    $API = new API($_REQUEST['request'], $_SERVER['HTTP_ORIGIN']);
-	    echo $API->processAPI();
+	    $data = $API->processAPI();
+	    $API->sendResponse($data, 'application/json');
 	} catch (Exception $e) {
 	    echo json_encode(Array('error' => $e->getMessage()));
 	}

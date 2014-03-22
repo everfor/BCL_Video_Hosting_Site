@@ -54,6 +54,7 @@
 					throw new Exception("Unexpected Header");
         	}
 
+        	// Data is stored in $this->request property
         	switch ($this->method) {
         		case 'DELETE' :
         		case 'POST' :
@@ -89,11 +90,18 @@
 
 		public function processAPI() {
 			// Check if we have a correctly parsed HTTP method
-			if (property_exists($this, $this->endpoint)) {
+			if ((int)method_exists($this, $this->endpoint) > 0) {
 				return $this->_response($this->{$this->endpoint}($this->args));
 			}
 
 			return $this->_response('No Endpoint: $this->endpoint, 404');
+		}
+
+		public function sendResponse($data, $content_type = 'text/html', $status = 200) {
+			header('Content-type: ' . $contentType);
+			if ($status === 200) {
+				echo $data;
+			}
 		}
 
 		private function _response($data, $status = 200) {

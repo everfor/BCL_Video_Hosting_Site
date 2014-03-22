@@ -6,8 +6,11 @@
 			parent::__construct($request);
 		}
 
-		protected function example() {
-			return 'Hello!';
+		protected function example($args) {
+			return array(
+				'name'	=>	$args[0],
+				'value'	=>	$args[1]
+			);
 		}
 	}
 ?>
