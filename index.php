@@ -3,8 +3,7 @@
     include 'header.php';
 ?>
 
-<div>
-    {{ 1 + 2 }}
+<div ng-view></div>
 </div>
 
 </body>
