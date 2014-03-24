@@ -7,10 +7,12 @@
 	<?=$styles?>
 	<script src="js/lib/angular.js" type="text/javascript"></script>
 	<script src="js/lib/angular-route.js" type="text/javascript"></script>
-	<script src="js/app.js" type="text/javascript"></script>
-	<script src="js/controllers/search/controllers.js" type="text/javascript"></script>
 	<?=$scripts?>
 </head>
 <body ng-app="mainApp">
 	<div class="header">
+		<form action="POST">
+			<input type="text" placeholder="hello!"></input>
+			<button type="submit">submit</button>
+		</form>
 	</div>
