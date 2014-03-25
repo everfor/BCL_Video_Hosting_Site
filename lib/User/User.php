@@ -10,7 +10,7 @@
 
 			$this->username = $username;
 			$this->password = $password;
-			$this->email = $email;
+			$this->email 	= $email;
 		}
 
 		// Check if the username or email already exists
@@ -29,7 +29,7 @@
 			return (sizeof($result) > 0);
 		}
 
-		// Validility check
+		// Validility check for registration
 		public function validate() {
 			$this->validation = true;
 
@@ -124,6 +124,7 @@
 
 				$publicKey = md5($this->userObj['username'] . date('Y-m-d H:i:s'));
 				$privateKey = md5($this->userObj['salt'] . $_SERVER['HTTP_USER_AGENT']);
+				setcookie('public_key', $publicKey, time() + 3600 * 24 * 30);
 
 				// Create new cookie entry
 				$createCookieQuery = 'INSERT INTO autologin (user_id, public_key, private_key, created_on, last_used_on, last_used_ip)
@@ -135,6 +136,75 @@
 					':date_now'		=>	date('Y-m-d H:i:s')
 				);
 			}
+
+			return array(
+				'success'	=>	true,
+				'user'		=>	$this->userObj['username']
+			);
+		}
+
+		// Log out. Remove all sessions and cookies
+		public function logout() {
+			if (isset($_SESSION['UID'])) {
+				unset($_SESSION['UID']);
+			}
+
+			if (isset($_SESSION['UAGENT'])) {
+				unset($_SESSION['UAGENT']);
+			}
+
+			if (isset($_COOKIE['public_key'])) {
+				setcookie('public_key', '', time() - 3600);
+			}
+		}
+
+		// Use public key to detect if auto login is valid
+		public function autoLogin() {
+			if (isset($_COOKIE['public_key']) && strlen($_COOKIE['public_key']) >=32) {
+				// Check auto login data entries in database
+				$query = 'SELECT * FROM autologin WHERE public_key = :public_key';
+				$params = array( ':public_key' => $_COOKIE['public_key'] );
+				$auto = $this->connection->runUserQuery($query, $params);
+
+				if (sizeof($auto) > 0) {
+					$query = 'SELECT * FROM users WHERE id = :id';
+					$params = array( ':id' => $auto['user_id'] );
+					$this->userObj = $this->connection->runUserQuery($query, $params);
+
+					if (sizeof($this->userObj) > 0) {
+						// Check private key
+						if ($auto['private_key'] == md5($this->userObj['salt'] . $_SERVER['HTTP_USER_AGENT'])) {
+							// Log in!
+							$_SESSION['UID'] = $this->userObj['id'];
+							$_SESSION['UAGENT'] = md5($_SERVER['HTTP_USER_AGENT']);
+
+							// Update last login data
+							$query = 'UPDATE users
+										SET last_login_date = :date_now, last_login_ip = :ip
+										WHERE id = :user_id';
+							$params = array(
+								':date_now'	=>	date('Y-m-d H:i:s'),
+								':ip'		=>	ip2long($_SERVER['REMOTE_ADDR']),
+								':user_id'	=>	$this->userObj['id']
+							);
+							$this->connection->runUserQuery($query, $params);
+
+							$query = 'UPDATE autologin
+										SET SET last_used_on = :date_now, last_used_ip = :ip';
+							$this->connection->runUserQuery($query, $params);
+
+							return array(
+								'success'	=>	true
+							);
+						}
+					}
+				}
+			}
+
+			return array(
+				'success'	=>	false,
+				'message'	=>	'No cookie detected'
+			);
 		}
 	}
 ?>
