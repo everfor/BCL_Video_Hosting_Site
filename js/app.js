@@ -1,7 +1,6 @@
 var app = angular.module('mainApp', 
 	[
-		'ngRoute',
-		'searchControllers',
+		'ngRoute'
 	]
 );
 
@@ -11,16 +10,17 @@ app.config(
 		'$locationProvider',
 		function($routeProvider, $locationProvider) {
 			$routeProvider
+				.when('/login',
+					{
+						templateUrl: 'templates/loginForm.html'
+					}
+				)
 				.when('/search', 
 					{
-						templateUrl: 'js/templates/searchResults.html',
-						controller: 'searchCntrl', 
+						templateUrl: 'templates/searchResults.html'
 					}
 				)
 				.otherwise(
-					{
-						redirectTo: '/search'
-					}
 				);
 
 			if (window.history && window.history.pushState) {
