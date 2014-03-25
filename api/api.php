@@ -17,7 +17,7 @@
 		protected function register($args) {
 			if ($this->method === 'POST') {
 				// Assuming $_POST contains keys 'username', 'password', 'email'
-				require_once('../lib/General/User/User.php');
+				require_once('../lib/User/User.php');
 				$registerAgent = new User($this->request['username'], $this->request['password'], $this->request['email']);
 				
 				// Check if the username/email already exists in database
@@ -50,7 +50,14 @@
 		}
 
 		protected function login($args) {
+			if ($this->method === 'POST') {
+				// $POST contains username and password
+				require_once('../lib/User/User.php');
+				$user = new User($this->request['username'], $this->request['password']);
 
+				// Assume no autologin for now
+				return $user->login(false);
+			}
 		}
 	}
 ?>

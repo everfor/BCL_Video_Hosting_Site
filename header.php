@@ -2,8 +2,8 @@
 <?php
 	session_start();
 	// Help to check the autologin stuff
-	require_once('lib/User/User.php');
-	$userAgent = new User();
+	// require_once('lib/User/User.php');
+	// $userAgent = new User();
 ?>
 <!DOCTYPE html>
 <html>
@@ -15,7 +15,7 @@
 	<script src="js/lib/angular-route.js" type="text/javascript"></script>
 	<?=$scripts?>
 </head>
-<body ng-app="mainApp">
+<body>
 	<div class="header">
 		<form action="POST">
 			<input type="text" placeholder="hello!"></input>

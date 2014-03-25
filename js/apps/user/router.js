@@ -1,23 +1,20 @@
-var app = angular.module('mainApp', 
+var router = angular.module('userRouter', 
 	[
-		'ngRoute'
+		'ngRoute',
+		'userAccountControllers'
 	]
 );
 
-app.config(
+router.config(
 	[
 		'$routeProvider',
 		'$locationProvider',
 		function($routeProvider, $locationProvider) {
 			$routeProvider
-				.when('/login',
+				.when('/login', 
 					{
-						templateUrl: 'templates/loginForm.html'
-					}
-				)
-				.when('/search', 
-					{
-						templateUrl: 'templates/searchResults.html'
+						templateUrl: 'templates/loginForm.html',
+						controller: 'loginCntrl', 
 					}
 				)
 				.otherwise(
@@ -29,3 +26,5 @@ app.config(
 		}
 	]
 );
+
+angular.bootstrap(document.getElementById("user"),['userRouter']);

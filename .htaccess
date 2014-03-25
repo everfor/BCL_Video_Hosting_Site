@@ -2,5 +2,10 @@
 	RewriteEngine On
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteCond %{REQUEST_FILENAME} !-d
+	
+	# Redirect localhost/page to localhost/page.php
+	RewriteRule ^([a-z]+)[/]?$ $1.php [L,NC]
+
+	# Rewrite rule for api calls
 	RewriteRule api/(.*)$ api/index.php?request=$1 [QSA,NC,L]
 </IfModule>
