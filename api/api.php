@@ -17,8 +17,8 @@
 		protected function register($args) {
 			if ($this->method === 'POST') {
 				// Assuming $_POST contains keys 'username', 'password', 'email'
-				require_once('../lib/General/User/Register.php');
-				$registerAgent = new Register($this->request['username'], $this->request['password'], $this->request['email']);
+				require_once('../lib/General/User/User.php');
+				$registerAgent = new User($this->request['username'], $this->request['password'], $this->request['email']);
 				
 				// Check if the username/email already exists in database
 				if ($registerAgent->exists()) {
