@@ -1,5 +1,5 @@
 <?php
-    $pageTitle = 'Index Page';
+    $pageTitle = 'Search';
     $scripts = '';
     include 'header.php';
 ?>

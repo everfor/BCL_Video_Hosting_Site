@@ -1,6 +1,6 @@
 <?php
-    $pageTitle = 'Index Page';
-    $scripts = '<script src="js/apps/user/controllers.js" type="text/javascript"></script>';
+    $pageTitle = 'Login Page';
+    $scripts = '<script src="js/controllers/user.js" type="text/javascript"></script>';
     include 'header.php';
 ?>
 

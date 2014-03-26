@@ -10,15 +10,15 @@
 <head>
 	<meta char-set="utf-8">
 	<title><?=$pageTitle ?></title>
-	<?=$styles?>
+	<?=$styles ?>
 	<script src="/js/lib/jquery-2.1.0.min.js" type="text/javascript"></script>
 	<script src="/js/lib/angular.js" type="text/javascript"></script>
 	<script src="/js/lib/angular-route.js" type="text/javascript"></script>
 	<!--Main AngularJS app-->
 	<script src="/js/main.js" type="text/javascript"></script>
 	<!--Controllers for searching-->
-	<script src="/js/apps/search/controllers.js" type="text/javascript"></script>
-	<?=$scripts?>
+	<script src="/js/controllers/search.js" type="text/javascript"></script>
+	<?=$scripts ?>
 </head>
 <body ng-app="main">
 	<div class="header">
@@ -27,6 +27,5 @@
 				<input id="searchTerm" type="text" placeholder="hello!" ng-model="searchTerm" ng-bind="searchTerm"></input>
 				<button type="submit">Search</button>
 			</form>
-			<span ng-bind="searchTerm" id="searchSpan"></span>
 		</div>
 	</div>

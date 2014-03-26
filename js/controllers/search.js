@@ -8,7 +8,6 @@ angular.module('main').controller('searchCntrl',
 				// JQuery
 				(function($) {
 					$('#searchTerm').val($scope.searchTerm);
-					$('#searchSpan').text($scope.searchTerm);
 				})(jQuery);
 			}
 			$scope.message = "Hello World!";
