@@ -1,6 +1,4 @@
-var searchControllers = angular.module('searchControllers', []);
-
-searchControllers.controller('searchCntrl', 
+angular.module('main').controller('searchCntrl', 
 	[
 		'$scope',
 		function($scope) {

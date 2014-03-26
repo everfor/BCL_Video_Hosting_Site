@@ -13,12 +13,15 @@
 	<?=$styles?>
 	<script src="js/lib/angular.js" type="text/javascript"></script>
 	<script src="js/lib/angular-route.js" type="text/javascript"></script>
+	<script src="js/main.js" type="text/javascript"></script>
 	<?=$scripts?>
 </head>
-<body>
-	<div class="header">
-		<form action="POST">
-			<input type="text" placeholder="hello!"></input>
-			<button type="submit">submit</button>
-		</form>
+<body ng-app="main">
+	<div id="header">
+		<div id="searchBar">
+			<form action="POST">
+				<input type="text" placeholder="hello!"></input>
+				<button type="submit">submit</button>
+			</form>
+		</div>
 	</div>

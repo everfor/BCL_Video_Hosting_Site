@@ -1,23 +1,26 @@
-var router = angular.module('userRouter', 
+var main = angular.module('main', 
 	[
-		'ngRoute',
-		'userAccountControllers'
+		'ngRoute'
 	]
 );
 
-router.config(
+main.config(
 	[
 		'$routeProvider',
 		'$locationProvider',
 		function($routeProvider, $locationProvider) {
 			$routeProvider
-				.when('/login', 
+				.when('/search', 
+					{
+						templateUrl: 'templates/searchResults.html',
+						controller: 'searchCntrl', 
+					}
+				)
+				.when('/login',
 					{
 						templateUrl: 'templates/loginForm.html',
 						controller: 'loginCntrl', 
 					}
-				)
-				.otherwise(
 				);
 
 			if (window.history && window.history.pushState) {
@@ -26,5 +29,3 @@ router.config(
 		}
 	]
 );
-
-angular.bootstrap(document.getElementById("user"),['userRouter']);

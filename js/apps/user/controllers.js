@@ -1,6 +1,6 @@
-var userControllers = angular.module('userAccountControllers', []);
+var main = angular.module('main');
 
-userControllers.controller('loginCntrl',
+main.controller('loginCntrl',
 	[
 		'$scope',
 		'$http',
@@ -22,7 +22,7 @@ userControllers.controller('loginCntrl',
 	]
 );
 
-userControllers.controller('regCntrl',
+main.controller('regCntrl',
 	[
 		'$scope',
 		'$http',
