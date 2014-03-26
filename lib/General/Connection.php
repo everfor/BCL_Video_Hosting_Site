@@ -4,7 +4,7 @@
 		protected $host, $db_user, $db_pass, $video_db, $user_db, $videoConnection, $userConnection;
 
 		function __construct() {
-			require_once('Configurations.php');
+			require_once('/lib/General/Configurations.php');
 
 			$this->host = Configurations::$host;
 			$this->db_user = Configurations::$db_user;

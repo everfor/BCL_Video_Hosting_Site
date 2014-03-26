@@ -2,8 +2,8 @@
 <?php
 	session_start();
 	// Help to check the autologin stuff
-	// require_once('lib/User/User.php');
-	// $userAgent = new User();
+	require_once('/lib/User/User.php');
+	$userAgent = new User();
 ?>
 <!DOCTYPE html>
 <html>
