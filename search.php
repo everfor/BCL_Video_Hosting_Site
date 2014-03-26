@@ -1,6 +1,6 @@
 <?php
     $pageTitle = 'Index Page';
-    $scripts = '<script src="js/apps/search/controllers.js" type="text/javascript"></script>';
+    $scripts = '';
     include 'header.php';
 ?>
 

@@ -15,6 +15,7 @@ main.controller('loginCntrl',
 					$http({method: 'POST', url: 'api/login', data: userInfo})
 						.success(function(data) {
 							$scope.message = 'yooooloooo!';
+							// TODO: parse the login data
 						});
 				}
 			}
@@ -38,6 +39,7 @@ main.controller('regCntrl',
 					$http({method: 'POST', url: 'api/register', data: userInfo})
 						.success(function(data) {
 							$scope.message = 'That\'s amzing eh!';
+							// TODO: parse the registration data
 						});
 				}
 			}

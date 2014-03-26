@@ -12,14 +12,25 @@ main.config(
 			$routeProvider
 				.when('/search', 
 					{
-						templateUrl: 'templates/searchResults.html',
+						templateUrl: '/templates/searchResults.html',
+						controller: 'searchCntrl', 
+					}
+				)
+				.when('/search/:term',
+					{
+						templateUrl: '/templates/searchResults.html',
 						controller: 'searchCntrl', 
 					}
 				)
 				.when('/login',
 					{
-						templateUrl: 'templates/loginForm.html',
+						templateUrl: '/templates/loginForm.html',
 						controller: 'loginCntrl', 
+					}
+				)
+				.otherwise(
+					{
+						templateUrl: '/templates/index.html',
 					}
 				);
 
