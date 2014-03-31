@@ -14,6 +14,7 @@
 			);
 		}
 
+        // User account regesitration
 		protected function register($args) {
 			if ($this->method === 'POST') {
 				// Assuming $_POST contains keys 'username', 'password', 'email'
@@ -49,6 +50,7 @@
 			);
 		}
 
+        // User login
 		protected function login($args) {
 			if ($this->method === 'POST') {
 				// $POST contains username and password
@@ -60,6 +62,9 @@
 			}
 		}
 
+        // Searching function
+        // Designen to realize the search of videos by both keywords and categories
+        // And the searching of users
 		protected function search($args) {
 			if ($this->method === 'POST') {
 				// Search for videos

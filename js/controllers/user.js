@@ -32,7 +32,7 @@ main.controller('regCntrl',
 		'$scope',
 		'$http',
 		function($scope, $http) {
-			$scope.message = '';
+			
 			$scope.submit = function() {
 				if ($scope.username && $scope.password && $scope.email) {
 					var userInfo = {
@@ -47,6 +47,8 @@ main.controller('regCntrl',
 						});
 				}
 			}
+
+			$scope.message = '';
 		}
 	]
 );

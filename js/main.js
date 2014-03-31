@@ -28,6 +28,12 @@ main.config(
 						controller: 'loginCntrl', 
 					}
 				)
+				.when('/register',
+					{
+						templateUrl: 'templates/registrationForm.html',
+						controller: 'regCntrl',
+					}
+				)
 				.otherwise(
 					{
 						templateUrl: '/templates/index.html',
