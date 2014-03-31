@@ -59,5 +59,23 @@
 				return $user->login(false);
 			}
 		}
+
+		protected function search($args) {
+			if ($this->method === 'POST') {
+				// Search for videos
+				// Will also implement the searching for users
+				if ($this->verb === 'video') {
+				    require_once('../lib/Video/Video.php');
+                    $video = new Video();
+
+                    // Determine if the search is by keyword or by category
+                    if ($args[0] === 'keyword') {
+                        return $video->searchVideoByKeywords($this->request['keyword']);
+                    } else if ($args[0] === 'category') {
+                        return $video->getVidesByCategory($this->request['category']);
+                    }
+				}
+			}
+		}
 	}
 ?>
