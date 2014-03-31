@@ -10,6 +10,7 @@
 <head>
     <meta char-set="utf-8">
     <title><?=$pageTitle ?></title>
+    <link href="/css/common.css" rel="stylesheet" type="text/css">
     <?=$styles ?>
     <script src="/js/lib/jquery-2.1.0.min.js" type="text/javascript"></script>
     <script src="/js/lib/angular.js" type="text/javascript"></script>
@@ -29,3 +30,4 @@
             </form>
         </div>
     </div>
+    <div class="content">

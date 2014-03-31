@@ -1,0 +1,41 @@
+/* General */
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    margin: 0;
+}
+
+/* Content */
+.content {
+    margin: auto 8px auto 8px;
+}
+
+/* Footer */
+.footer {
+    position: absolute;
+    bottom: 0;
+    padding: 10px 0 10px 0;
+    border: 0;
+    height: 20px;
+    width: 100%;
+    background-color: #c7c7c7;
+    -moz-box-shadow: 0px 0px 4px #000000;
+    -webkit-box-shadow: 0px 0px 4px #000000;
+    box-shadow: 0px 0px 4px #000000;
+    /* IE 7 AND 8 DO NOT SUPPORT BLUR PROPERTY OF SHADOWS */
+    /* And I don't care about it */
+}
+
+.footer span {
+    margin-left: 40px;
+    line-height: 20px;
+    display: inline-block;
+}
+
+.footer .right {
+    float: right;
+    margin-right: 40px;
+}
