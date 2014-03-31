@@ -70,7 +70,7 @@
 
                     // Determine if the search is by keyword or by category
                     if ($args[0] === 'keyword') {
-                        return $video->searchVideoByKeywords($this->request['keyword']);
+                        return $video->getVideosByKeywords($this->request['keyword']);
                     } else if ($args[0] === 'category') {
                         return $video->getVidesByCategory($this->request['category']);
                     }
