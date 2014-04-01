@@ -8,11 +8,95 @@ body {
     font-size: 14px;
     height: 100%;
     margin: 0;
+    background-color: #fefefe;
 }
 
 /* Content */
 .content {
     margin: auto 8px auto 8px;
+}
+
+/* Header */
+.header {
+    padding: 15px 0 20px 20px;
+    border: 0;
+    height: 20px;
+    background-color: #fafafa;
+    -moz-box-shadow: 0px 0px 4px #959595;
+    -webkit-box-shadow: 0px 0px 4px #959595;
+    box-shadow: 0px 0px 4px #959595;
+}
+
+.header .left {
+    float: left;
+}
+
+.header .search {
+    width: 400px;
+    height: 30px;
+}
+
+.header .search form {
+    height: 100%;
+}
+
+.header .search input[type="text"] {
+    float: left;
+    border: 1px solid #dddddd;
+    background: white;
+    color: #666; 
+    outline: none; 
+    height: 26px; 
+    width: 80%; 
+    padding-left: 5px;
+    /* Animations */
+    -webkit-transition: border 0.3s;
+    transition: border 0.3s;
+}
+
+.header .search input[type="text"]:hover {
+    border: 1px solid #ffa853;
+}
+
+.header .search input[type="text"]:focus {
+    border: 1px solid #ffa853;
+    -webket-box-shadow: 0 0 5px 1px #ffa853;
+    box-shadow: 0 0 5px 1px #ffa853;
+}
+
+.header .search button {
+    float: left;
+    margin: 0;
+    height: 100%;
+    width: 70px;
+    background: #ededed url("/img/search.png") no-repeat center;
+    background-size: contain;
+    text-indent: 0;
+    border: 1px solid #dcdcdc;
+    border-left: 0; /* Used to make input text and button stick together */
+    display: inline-block;
+    color: #777777;
+    font-size: 15px;
+    font-weight: bold;
+    font-style: normal;
+    text-decoration: none;
+    text-align: center;
+    text-shadow: 1px 1px 0px #ffffff;
+    outline: none;
+    /* Animation */
+    -webkit-tansition: background-color 0.3s;
+    transition: background-color 0.3s;
+}
+
+.header .search button:hover {
+    cursor: pointer;
+    background-color: #dfdfdf;
+}
+
+.header .search button:active {
+    -moz-box-shadow: inset 1px 1px 1px 1px #cccccc;
+    -webkit-box-shadow: inset 1px 1px 1px 1px #cccccc;
+    box-shadow: inset 1px 1px 1px 1px #cccccc;
 }
 
 /* Footer */
@@ -23,10 +107,10 @@ body {
     border: 0;
     height: 20px;
     width: 100%;
-    background-color: #c7c7c7;
-    -moz-box-shadow: 0px 0px 4px #000000;
-    -webkit-box-shadow: 0px 0px 4px #000000;
-    box-shadow: 0px 0px 4px #000000;
+    background-color: #efefef;
+    -moz-box-shadow: 0px 0px 4px #959595;
+    -webkit-box-shadow: 0px 0px 4px #959595;
+    box-shadow: 0px 0px 4px #959595;
     /* IE 7 AND 8 DO NOT SUPPORT BLUR PROPERTY OF SHADOWS */
     /* And I don't care about it */
 }

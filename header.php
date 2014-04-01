@@ -23,10 +23,10 @@
 </head>
 <body ng-app="main">
     <div class="header">
-        <div id="searchBar" ng-controller="searchCntrl">
+        <div class="left search" ng-controller="searchCntrl">
             <form ng-submit="fetch()">
                 <input id="searchTerm" type="text" placeholder="hello!" ng-model="searchTerm" ng-bind="searchTerm"></input>
-                <button type="submit">Search</button>
+                <button type="submit"></button>
             </form>
         </div>
     </div>
