@@ -1,0 +1,81 @@
+/* CSS style for video watching pages */
+.wrapper {
+	min-width: 1000px;
+	max-width: 1050px;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #fcfcfc;
+	padding: 10px;
+	box-shadow: inset 1px 1px 3px 1px #dddddd;
+	-webkit-box-shadow: inset 1px 1px 3px 1px #dddddd;
+	border-radius: 2px;
+}
+
+/* http://stackoverflow.com/a/12540569 */
+/* Need this fix because I am floating the child divs */
+.wrapper:after {
+	content: " ";
+	display: block;
+	clear: both;
+} 
+
+.wrapper .left {
+	float: left;
+}
+
+.wrapper .main {
+	width: 68%;
+	border-right: 1px solid #cccccc;
+	margin-right: 10px;
+}
+
+.wrapper .side {
+	width: 26%;
+}
+
+.wrapper .side .caption h3 {
+	margin-top: 0;
+}
+
+.wrapper .side .video-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.wrapper .side .video-list li {
+	list-style: none;
+	padding: 0;
+	margin-bottom: 10px;
+}
+
+.wrapper .side .video-list a {
+	text-decoration: none;
+}
+
+.wrapper .side .video-list a:hover {
+	color: #15317E;
+	cursor: pointer;
+}
+
+/* http://stackoverflow.com/a/12540569 */
+/* Need this fix because I am floating the children */
+.wrapper .side .video-list .video-list-detail:after {
+	content: " ";
+	display: block;
+	clear: both;
+} 
+
+.wrapper .side .video-list .video-list-detail span {
+	float: left;
+	display: inline-block;
+}
+
+.wrapper .side .video-list .video-list-detail .video-list-preview img {
+	margin-right: 5px;
+	width: 120px;
+}
+
+.wrapper .side .video-list .video-list-detail .video-list-title {
+	font-weight: bold;
+}

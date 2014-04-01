@@ -30,8 +30,14 @@ main.config(
                 )
                 .when('/register',
                     {
-                        templateUrl: 'templates/registrationForm.html',
+                        templateUrl: '/templates/registrationForm.html',
                         controller: 'regCntrl',
+                    }
+                )
+                .when('/watch',
+                    // It is just a testing template now
+                    {
+                        templateUrl: '/templates/watchVideo.html',
                     }
                 )
                 .otherwise(
