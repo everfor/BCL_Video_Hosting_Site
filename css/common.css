@@ -70,7 +70,7 @@ body {
     margin: 0;
     height: 100%;
     width: 70px;
-    background: #ededed url("/img/search.png") no-repeat center;
+    background: #ededed url("../img/search.png") no-repeat center;
     background-size: contain;
     text-indent: 0;
     border: 1px solid #dcdcdc;

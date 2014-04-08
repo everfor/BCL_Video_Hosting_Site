@@ -8,10 +8,12 @@
 
         // This method is used for testing purposes
         protected function example($args) {
-            return array(
+            $result =  array(
                 'name'  =>  $args[0],
                 'value' =>  $args[1]
             );
+
+            return $result['name'];
         }
 
         // User account regesitration
@@ -66,7 +68,7 @@
         // Designen to realize the search of videos by both keywords and categories
         // And the searching of users
         protected function search($args) {
-            if ($this->method === 'POST') {
+            if ($this->method == 'POST') {
                 // Search for videos
                 // Will also implement the searching for users
                 if ($this->verb === 'video') {
@@ -75,7 +77,10 @@
 
                     // Determine if the search is by keyword or by category
                     if ($args[0] === 'keyword') {
-                        return $video->getVideosByKeywords($this->request['keyword']);
+                        $tmp =  $video->getVideosByKeywords($this->request['keyword']);
+                        print_r($tmp);
+
+                        return $tmp;
                     } else if ($args[0] === 'category') {
                         return $video->getVidesByCategory($this->request['category']);
                     }

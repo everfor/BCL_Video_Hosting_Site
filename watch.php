@@ -1,7 +1,7 @@
 <?php
     $pageTitle = 'Watch';
     $scripts = '';
-    $styles = '<link href="/css/watch.css" rel="stylesheet" type="text/css">';
+    $styles = '<link href="css/watch.css" rel="stylesheet" type="text/css">';
     include 'header.php';
 ?>
 

@@ -9,40 +9,42 @@ main.config(
         '$routeProvider',
         '$locationProvider',
         function($routeProvider, $locationProvider) {
+            // DONT forget to remove '/video' part in urls
+            // This is only used in Ubuntu test environment
             $routeProvider
-                .when('/search', 
+                .when('/video/search', 
                     {
-                        templateUrl: '/templates/searchResults.html',
+                        templateUrl: 'templates/searchResults.html',
                         controller: 'searchCntrl', 
                     }
                 )
-                .when('/search/:term',
+                .when('/video/search/:term',
                     {
-                        templateUrl: '/templates/searchResults.html',
+                        templateUrl: 'templates/searchResults.html',
                         controller: 'searchCntrl', 
                     }
                 )
-                .when('/login',
+                .when('/video/login',
                     {
-                        templateUrl: '/templates/loginForm.html',
+                        templateUrl: 'templates/loginForm.html',
                         controller: 'loginCntrl', 
                     }
                 )
-                .when('/register',
+                .when('/video/register',
                     {
-                        templateUrl: '/templates/registrationForm.html',
+                        templateUrl: 'templates/registrationForm.html',
                         controller: 'regCntrl',
                     }
                 )
-                .when('/watch',
+                .when('/video/watch',
                     // It is just a testing template now
                     {
-                        templateUrl: '/templates/watchVideo.html',
+                        templateUrl: 'templates/watchVideo.html',
                     }
                 )
                 .otherwise(
                     {
-                        templateUrl: '/templates/index.html',
+                        templateUrl: 'templates/index.html',
                     }
                 );
 

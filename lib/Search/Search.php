@@ -1,43 +1,45 @@
 <?php
-    Class Search {
-        $connection;
 
-        function __construct() {
-            require_once('/lib/General/Connection.php');
+    Class Search {
+        protected $connection;
+
+        public function __construct() {
+            require_once(dirname(__FILE__) . '/../General/Connection.php');
             $this->connection = new Connection();
         }
 
-        function searchVideoByKeywords($sentence) {
+        public function searchVideoByKeywords($sentence) {
             // Split the query sentence into different keywords
             $keywords = explode(" ", $sentence);
-            $query = 'SELECT * FROM videos WHERE title LIKE %:key0%';
-            $params = array( ':key1' => $keywords[0] );
-
-            $keywords = array_slice($keywords, 1);
+            $query = "";
 
             // Add all keywords search using union
+            // TODO: There's a bug as :var should not contain numbers
             foreach ($keywords as $index => $keyword) {
-                $key = ':key' . strval($index);
-                $query = $query . ' UNION
-                                    SELECT id, vimeo_id FROM videos WHERE title LIKE %{$key}%';
-                $params[$key] = $keyWord;
+                if ($index === 0) {
+                    $query = $query . "SELECT * FROM videos WHERE title LIKE \"%{$keyword}%\"";
+                } else {
+                    $query = $query . " OR title LIKE \"%{$keyword}%\"";
+                }
             }
-
-            $result = $this->connection->runVideoQuery($query, $params);
+            
+            $result = $this->connection->runVideoQuery($query);
 
             if (sizeof($result) <= 0) {
-                return {
+                return array(
                     'success'   =>  false,
                     'message'   =>  'No result found'
-                };
+                );
             }
 
-            return {
+            return array(
                 'success'   =>  true,
                 'result'    =>  $result
-            };
+            );
         }
 
+        /*
+        * NOT TESTED
         function searchVideoByCategory($category) {
             // Get all video ids which belong to the requested category
             $query = 'SELECT video_id FROM categories WHERE category = :category';
@@ -58,9 +60,8 @@
 
             $ids = array_slice($ids, 1);
             foreach ($ids as $index => $id) {
-                $key = ':id' . strval($index);
-                $query = $query . ' UNION
-                                    SELECT * FROM videos WHERE id = {$key}';
+                $key = ':id' . strval($index + 1);
+                $query = $query . ' OR id = {$key}';
                 $params[$key] = $id;
             }
 
@@ -71,5 +72,6 @@
                 'result'    => $result
             );
         }
+        */
     }
 ?>
