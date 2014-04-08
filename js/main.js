@@ -12,31 +12,31 @@ main.config(
             // DONT forget to remove '/video' part in urls
             // This is only used in Ubuntu test environment
             $routeProvider
-                .when('/video/search', 
+                .when('/search', 
                     {
                         templateUrl: 'templates/searchResults.html',
                         controller: 'searchCntrl', 
                     }
                 )
-                .when('/video/search/:term',
+                .when('/search?request=:term',
                     {
                         templateUrl: 'templates/searchResults.html',
                         controller: 'searchCntrl', 
                     }
                 )
-                .when('/video/login',
+                .when('/login',
                     {
                         templateUrl: 'templates/loginForm.html',
                         controller: 'loginCntrl', 
                     }
                 )
-                .when('/video/register',
+                .when('/register',
                     {
                         templateUrl: 'templates/registrationForm.html',
                         controller: 'regCntrl',
                     }
                 )
-                .when('/video/watch',
+                .when('/watch',
                     // It is just a testing template now
                     {
                         templateUrl: 'templates/watchVideo.html',

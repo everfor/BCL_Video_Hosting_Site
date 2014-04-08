@@ -1,6 +1,5 @@
 <?php
     $pageTitle = 'Search';
-    $scripts = '';
     include 'header.php';
 ?>
 

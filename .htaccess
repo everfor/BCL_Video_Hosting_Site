@@ -5,10 +5,12 @@
     RewriteCond %{REQUEST_FILENAME} !-l
     
     # Redirect localhost/page to localhost/page.php
-    RewriteRule ^([a-z]+)[/]?$ $1.php [L,NC]
+    RewriteRule ^([a-z]+)\/?$ $1.php [L,NC]
 
+    # Prevent loop when redirecting to search.php
+    RewriteCond %{REQUEST_URI} !search.php
     # Redirect /search/^anything$ to search.php, with ^anything$ as a parameter passed to router
-    # RewriteRule search\/(.*)[/]?$ search.php [L,NC]
+    RewriteRule ^search search.php [L,NC]
 
     # Rewrite rule for api calls
     RewriteRule api/(.*)$ api/index.php?request=$1 [QSA,NC,L]

@@ -17,19 +17,20 @@ angular.module('main').controller('searchCntrl',
                         }
                     });
             }
-
+            
             if ($routeParams.term) {
+                console.log($routeParams.term);
                 $scope.searchTerm = $routeParams.term;
                 // JQuery
                 (function($) {
                     $('#searchTerm').val($scope.searchTerm);
                 })(jQuery);
 
-                $scope.fetch();
+                // $scope.fetch();
             }
-            
             // Message is only used for testing purposes
             $scope.message = "Hello World!";
         }
+        
     ]
 );
