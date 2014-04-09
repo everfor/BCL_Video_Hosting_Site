@@ -16,7 +16,7 @@
             
         }
         
-        public function runVideoQuery($query, $array = null) {;
+        public function runVideoQuery($query, $array = null) {
             $prep = $this->videoConnection->prepare($query);
             
             // TODO here
