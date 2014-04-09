@@ -14,37 +14,37 @@ main.config(
             $routeProvider
                 .when('/search', 
                     {
-                        templateUrl: 'templates/searchResults.html',
+                        templateUrl: '/templates/searchResults.html',
                         controller: 'searchCntrl', 
                     }
                 )
-                .when('/search?request=:term',
+                .when('/search/:term',
                     {
-                        templateUrl: 'templates/searchResults.html',
+                        templateUrl: '/templates/searchResults.html',
                         controller: 'searchCntrl', 
                     }
                 )
                 .when('/login',
                     {
-                        templateUrl: 'templates/loginForm.html',
+                        templateUrl: '/templates/loginForm.html',
                         controller: 'loginCntrl', 
                     }
                 )
                 .when('/register',
                     {
-                        templateUrl: 'templates/registrationForm.html',
+                        templateUrl: '/templates/registrationForm.html',
                         controller: 'regCntrl',
                     }
                 )
                 .when('/watch',
                     // It is just a testing template now
                     {
-                        templateUrl: 'templates/watchVideo.html',
+                        templateUrl: '/templates/watchVideo.html',
                     }
                 )
                 .otherwise(
                     {
-                        templateUrl: 'templates/index.html',
+                        templateUrl: '/templates/index.html',
                     }
                 );
 
