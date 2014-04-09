@@ -9,13 +9,15 @@ angular.module('main').controller('searchCntrl',
             $scope.fetch = function() {
                 // Model $scope.searchTerm is binded with the input text
                 // Will implement search by category as well
-                var data = { keyword: $scope.searchTerm };
-                $http({method: 'POST', url: 'api/search/video/keyword', data: data})
-                    .success(function(response) {
-                        if (response.success === 'true') {
-                            $scope.searchResult = response.result;
-                        }
-                    });
+                if ($scope.searchTerm) {
+                    var data = { keyword: $scope.searchTerm };
+                    $http({method: 'POST', url: 'api/search/video/keyword', data: data})
+                        .success(function(response) {
+                            if (response.success === 'true') {
+                                $scope.searchResult = response.result;
+                            }
+                        });
+                }
             }
             
             if ($routeParams.term) {
