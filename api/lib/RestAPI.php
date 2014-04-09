@@ -52,25 +52,33 @@
                     $this->method = 'PUT';
                 } else {
                     throw new Exception("Unexpected Header");
+                }
             }
 
             // Data is stored in $this->request property
             switch ($this->method) {
-                case 'DELETE' :
-                case 'POST' :
+                case "DELETE" :
+                    break;
+                case "POST" :
+                    // $_POST is always empty and I need to get the data this way
+                    // Need to look further into it
+                    // TODO
+                    $rest_json = file_get_contents("php://input");
+                    $_POST = json_decode($rest_json, true);
+                    
                     $this->request = $this->_cleanInputs($_POST);
                     break;
-                case 'GET':
+                case "GET":
                     $this->request = $this->_cleanInputs($_GET);
                     break;
-                case 'PUT':
+                case "PUT":
                     $this->request = $this->_cleanInputs($_GET);
                     $this->file = file_get_contents("php://input");
                     break;
                 default:
+                    print_r("default");
                     $this->_response('Invalid Method', 405);
                 break;
-                }
             }
         }
 

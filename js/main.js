@@ -1,6 +1,7 @@
 var main = angular.module('main', 
     [
-        'ngRoute'
+        'ngRoute',
+        'ngSanitize'
     ]
 );
 
@@ -39,7 +40,14 @@ main.config(
                 .when('/watch',
                     // It is just a testing template now
                     {
+                        templateUrl: '/templates/watchVideo.html'
+                    }
+                )
+                .when('/watch/:id',
+                    // It is just a testing template now
+                    {
                         templateUrl: '/templates/watchVideo.html',
+                        controller: 'watchCntrl',
                     }
                 )
                 .otherwise(

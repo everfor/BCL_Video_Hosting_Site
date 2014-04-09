@@ -72,17 +72,20 @@
                 // Search for videos
                 // Will also implement the searching for users
                 if ($this->verb === 'video') {
-                    require_once('../lib/Video/Video.php');
+                    require_once(dirname(__FILE__) . '/../lib/Video/Video.php');
                     $video = new Video();
 
-                    // Determine if the search is by keyword or by category
+                    // Determine if the search is by keyword or by category, or by id
                     if ($args[0] === 'keyword') {
-                        $tmp =  $video->getVideosByKeywords($this->request['keyword']);
-                        print_r($tmp);
-
-                        return $tmp;
+                        // Return a json object
+                        return json_encode($video->getVideosByKeywords($this->request['keyword']));
                     } else if ($args[0] === 'category') {
-                        return $video->getVidesByCategory($this->request['category']);
+                        // TODO
+                        // NOT TESTED
+                        return json_encode($video->getVidesByCategory($this->request['category']));
+                    } else if ($args[0] === 'id') {
+                        // Fetch video by id
+                        return json_encode($video->getVideoById($this->request['id']));
                     }
                 }
             }

@@ -15,6 +15,7 @@
     <script src="/js/lib/jquery-2.1.0.min.js" type="text/javascript"></script>
     <script src="/js/lib/angular.js" type="text/javascript"></script>
     <script src="/js/lib/angular-route.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-sanitize.min.js"></script>
     <!--Main AngularJS app-->
     <script src="/js/main.js" type="text/javascript"></script>
     <!--Controllers for searching-->
@@ -24,7 +25,7 @@
 <body ng-app="main">
     <div class="header">
         <div class="left search" ng-controller="searchCntrl">
-            <form ng-submit="fetch()">
+            <form ng-submit="search()">
                 <input id="searchTerm" type="text" placeholder="hello!" ng-model="searchTerm" ng-bind="searchTerm"></input>
                 <button type="submit"></button>
             </form>

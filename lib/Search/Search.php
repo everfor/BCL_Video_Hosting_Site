@@ -19,10 +19,28 @@
                 if ($index === 0) {
                     $query = $query . "SELECT * FROM videos WHERE title LIKE \"%{$keyword}%\"";
                 } else {
-                    $query = $query . " OR title LIKE \"%{$keyword}%\"";
+                    $query = $query . " AND title LIKE \"%{$keyword}%\"";
                 }
             }
             
+            $result = $this->connection->runVideoQuery($query);
+
+            if (sizeof($result) <= 0) {
+                return array(
+                    'success'   =>  false,
+                    'message'   =>  'No result found'
+                );
+            }
+
+            return array(
+                'success'   =>  true,
+                'result'    =>  $result
+            );
+        }
+
+        public function searchVideoById($id) {
+            $query = "SELECT * FROM videos WHERE id = {$id}";
+
             $result = $this->connection->runVideoQuery($query);
 
             if (sizeof($result) <= 0) {

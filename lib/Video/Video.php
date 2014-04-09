@@ -20,5 +20,11 @@
             $search = new Search();
             return $search->searchVideoByKeywords($keywords);
         }
+
+        public function getVideoById($id) {
+            require_once(dirname(__FILE__) . '/../Search/Search.php');
+            $search = new Search();
+            return $search->searchVideoById($id);
+        }
     }
 ?>

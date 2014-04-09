@@ -1,7 +1,8 @@
 <div>
 	<div class="wrapper">
 		<div class="left main">
-			<iframe width="700" height="394" src="//www.youtube.com/embed/HTmIiR1hMmM" frameborder="0" allowfullscreen></iframe>
+			<iframe type="text/html" ng-src='{{trustSrc(videoPlayer)}}' width="700" height="394" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+			{{videoPlayer}}
 			<div id="video-info">
 				<span id="views"></span>
 			</div>

@@ -3,6 +3,10 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-l
+
+    # Redirect www to non-www
+    RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+    RewriteRule ^(.*)$ http://%1/$1 [R=301]
     
     # Redirect localhost/page to localhost/page.php
     RewriteRule ^([a-z]+)\/?$ $1.php [L,NC]
@@ -11,6 +15,11 @@
     RewriteCond %{REQUEST_URI} !search.php
     # Redirect /search/^anything$ to search.php, with ^anything$ as a parameter passed to router
     RewriteRule ^search search.php [L,NC]
+
+    # Prevent loop when redirecting to watch.php
+    RewriteCond %{REQUEST_URI} !watch.php
+    # Redirect /search/^anything$ to search.php, with ^anything$ as a parameter passed to router
+    RewriteRule ^watch watch.php [L,NC]
 
     # Rewrite rule for api calls
     RewriteRule api/(.*)$ api/index.php?request=$1 [QSA,NC,L]
