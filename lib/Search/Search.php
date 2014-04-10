@@ -32,6 +32,12 @@
                 );
             }
 
+            // Get the thumbnail of all results
+            foreach ($result as $index => $item) {
+                $vimeo_response = json_decode(file_get_contents("http://vimeo.com/api/v2/video/" . $item['vimeo_id'] . ".json"));
+                $result[$index]['thumbnail'] = $vimeo_response[0]->thumbnail_small;
+            }
+
             return array(
                 'success'   =>  true,
                 'result'    =>  $result
