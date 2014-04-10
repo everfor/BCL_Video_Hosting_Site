@@ -5,7 +5,7 @@
 
         // Username and password for database
         public static $db_user = 'root';
-        public static $db_pass = 'yg19940308';
+        public static $db_pass = 'root';
 
         // Databses
         public static $video_db = 'Videos';

@@ -14,7 +14,7 @@ angular.module('main').controller('watchCntrl',
             $scope.fetch = function() {
                 if ($scope.videoId) {
                     var data = { id : $scope.videoId };
-                    $http({method: 'POST', url: 'api/search/video/id', data: data})
+                    $http({method: 'POST', url: '/api/search/video/id', data: data})
                         .success(function(response) {
                             if (response.success) {
                                 $scope.videoResult = response.result;

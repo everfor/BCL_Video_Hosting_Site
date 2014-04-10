@@ -15,7 +15,7 @@
     <script src="/js/lib/jquery-2.1.0.min.js" type="text/javascript"></script>
     <script src="/js/lib/angular.js" type="text/javascript"></script>
     <script src="/js/lib/angular-route.js" type="text/javascript"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-sanitize.min.js"></script>
+    <script src="/js/lib/angular-sanitize.min.js"></script>
     <!--Main AngularJS app-->
     <script src="/js/main.js" type="text/javascript"></script>
     <!--Controllers for searching-->

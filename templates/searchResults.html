@@ -1,5 +1,14 @@
-<div ng-repeat="videoEntry in searchResult">
-    <div>
-        {{videoEntry}}
-    </div>
+<div class="wrapper">
+	<div ng-repeat="videoEntry in searchResult">
+	    <div>
+	    	<!--IMPORTANT: Set the target to "parent" otherwise the anchor won't load-->
+	    	<!--		   corret php files -->
+	        <a target="_parent" ng-href="/watch/{{videoEntry.id}}">
+	        	{{videoEntry.title}}
+	        </a>
+	    </div>
+	</div>
+	<div id="no-result">
+		<i>{{noResult}}</i>
+	</div>
 </div>

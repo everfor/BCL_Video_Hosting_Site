@@ -16,6 +16,26 @@ body {
     margin: auto 8px auto 8px;
 }
 
+.wrapper {
+    min-width: 1000px;
+    max-width: 1050px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #fcfcfc;
+    padding: 10px;
+    box-shadow: inset 1px 1px 3px 1px #dddddd;
+    -webkit-box-shadow: inset 1px 1px 3px 1px #dddddd;
+    border-radius: 2px;
+}
+
+/* http://stackoverflow.com/a/12540569 */
+/* Need this fix because I am floating the child divs */
+.wrapper:after {
+    content: " ";
+    display: block;
+    clear: both;
+} 
+
 /* Header */
 .header {
     padding: 15px 0 20px 20px;
