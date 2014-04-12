@@ -4,8 +4,8 @@
     class User {
         protected $connection, $userObj, $username, $password, $salt, $email, $passHash, $ipAddress, $validation, $dateTime;
 
-        function __construct($username = '', $password = '', $email = '') {
-            require_once('/lib/General/Connection.php');
+        public function __construct($username = '', $password = '', $email = '') {
+            require_once(dirname(__FILE__) . '/../General/Connection.php');
             $this->connection = new Connection();
 
             $this->username = $username;
@@ -65,8 +65,8 @@
             $this->dateTime = date('Y-m-d H:i:s');
 
             // Create entry in the database
-            $query = 'INSERT INTO users (username, email, group_id, salt, passhash, perm_override_remove, perm_override_add, reg_date, reg_ip)
-                        VALUES (:username, :email, 1, :salt, :passhash, 0, 0, :reg_date, :reg_ip)';
+            $query = "INSERT INTO users (username, email, group_id, salt, passhash, perm_override_remove, perm_override_add, reg_date, reg_ip)
+                        VALUES (:username, :email, 1, :salt, :passhash, 0, 0, :reg_date, :reg_ip)";
             $params = array(
                 ':username' => $this->username,
                 ':email'    => $this->email,
@@ -78,11 +78,15 @@
 
             $this->connection->runUserQuery($query, $params);
 
+            /*
             return array(
-                'username'  => $this->username;
+                'username'  => $this->username
             );
+            */
+            return $query;
         }
 
+        /*
         // Log in
         // Also checks if "remember me" is checked
         public function login($remember) {
@@ -206,5 +210,6 @@
                 'message'   =>  'No cookie detected'
             );
         }
+        */
     }
 ?>

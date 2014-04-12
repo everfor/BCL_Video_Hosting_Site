@@ -43,6 +43,7 @@ main.controller('regCntrl',
                     $http({method: 'POST', url: 'api/register', data: userInfo})
                         .success(function(data) {
                             $scope.message = 'That\'s amzing eh!';
+                            console.log(data);
                             // TODO: parse the registration data
                         });
                 }

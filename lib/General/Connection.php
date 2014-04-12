@@ -12,8 +12,13 @@
             $this->video_db = Configurations::$video_db;
             $this->user_db = Configurations::$user_db;
             $this->videoConnection = new PDO("mysql:host={$this->host};dbname={$this->video_db}", $this->db_user, $this->db_pass);
-            $this->userConnection = new PDO("mysql:host={$this->host};dbname={$this->video_db}", $this->db_user, $this->db_pass);
-            
+            $this->userConnection = new PDO("mysql:host={$this->host};dbname={$this->user_db}", $this->db_user, $this->db_pass);
+
+            // http://stackoverflow.com/a/10438026
+            // Because MySql shuts down query preparation by default
+            // MySQL: Screw you! lol
+            $this->videoConnection->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+            $this->userConnection->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
         }
         
         public function runVideoQuery($query, $array = null) {
@@ -32,8 +37,6 @@
             return $result;
         }
 
-        /*
-        * NOT TESTED
         public function runUserQuery($query, $array = null) {
             $prep = $this->userConnection->prepare($query);
             if ($array != null) {
@@ -42,10 +45,9 @@
                 $prep->execute();
             }
 
-            $result = $prep->fecthAll(PDO::FETCH_ASSOC);
+            $result = $prep->fetchAll(PDO::FETCH_ASSOC);
 
             return $result;
         }
-        */
     }
 ?>

@@ -18,9 +18,9 @@
 
         // User account regesitration
         protected function register($args) {
-            if ($this->method === 'POST') {
+            if ($this->method == 'POST') {
                 // Assuming $_POST contains keys 'username', 'password', 'email'
-                require_once('../lib/User/User.php');
+                require_once(dirname(__FILE__) . '/../lib/User/User.php');
                 $registerAgent = new User($this->request['username'], $this->request['password'], $this->request['email']);
                 
                 // Check if the username/email already exists in database
@@ -32,7 +32,7 @@
                 }
 
                 // Validation
-                $validation = $register->validate();
+                $validation = $registerAgent->validate();
                 if ($validation['success'] === false) {
                     return $validation;
                 }
@@ -54,9 +54,9 @@
 
         // User login
         protected function login($args) {
-            if ($this->method === 'POST') {
+            if ($this->method == 'POST') {
                 // $POST contains username and password
-                require_once('../lib/User/User.php');
+                require_once(dirname(__FILE__) . '/../lib/User/User.php');
                 $user = new User($this->request['username'], $this->request['password']);
 
                 // Assume no autologin for now
