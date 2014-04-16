@@ -60,7 +60,7 @@
                 $user = new User($this->request['username'], $this->request['password']);
 
                 // Assume no autologin for now
-                return $user->login(false);
+                return json_encode($user->login(false));
             }
         }
 

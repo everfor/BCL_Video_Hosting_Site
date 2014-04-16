@@ -17,6 +17,7 @@ main.controller('loginCntrl',
                     $http({method: 'POST', url: 'api/login', data: userInfo})
                         .success(function(data) {
                             $scope.message = 'yooooloooo!';
+                            console.log(data);
                             // TODO: parse the login data
                         });
                 }

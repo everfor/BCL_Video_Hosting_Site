@@ -24,7 +24,7 @@
             $result = $this->connection->runUserQuery($query, $params);
 
             // Store the result. Used for login
-            $this->userObj = $result;
+            $this->userObj = $result[0];
 
             return (sizeof($result) > 0);
         }
@@ -78,15 +78,12 @@
 
             $this->connection->runUserQuery($query, $params);
 
-            /*
             return array(
                 'username'  => $this->username
             );
-            */
-            return $query;
         }
 
-        /*
+        
         // Log in
         // Also checks if "remember me" is checked
         public function login($remember) {
@@ -98,7 +95,7 @@
             }
 
             // Check password
-            if ($this->userObj['passhash'] != md5(md5($this->userObj['salt'] . md5($this->password)))) {
+            if ($this->userObj['passhash'] != md5(md5($this->userObj['salt']) . md5($this->password))) {
                 return array(
                     'success'   =>  false,
                     'message'   =>  'Incorrect password'
@@ -119,7 +116,10 @@
                 ':user_id'  =>  $this->userObj['id']
             );
 
+            $this->connection->runUserQuery($updateQuery, $updateArray);
+
             // Check autologin
+            /* NOT TESTED
             if ($remember) {
                 // Delete old cookie entry for the user
                 $delCookieQuery = 'DELETE FROM autologin WHERE user_id = :user_ud';
@@ -140,6 +140,7 @@
                     ':date_now'     =>  date('Y-m-d H:i:s')
                 );
             }
+            */
 
             return array(
                 'success'   =>  true,
@@ -147,6 +148,7 @@
             );
         }
 
+        /*
         // Log out. Remove all sessions and cookies
         public function logout() {
             if (isset($_SESSION['UID'])) {
