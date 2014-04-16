@@ -22,34 +22,10 @@
                 // Assuming $_POST contains keys 'username', 'password', 'email'
                 require_once(dirname(__FILE__) . '/../lib/User/User.php');
                 $registerAgent = new User($this->request['username'], $this->request['password'], $this->request['email']);
-                
-                // Check if the username/email already exists in database
-                if ($registerAgent->exists()) {
-                    return array(
-                        'success' => false,
-                        'message' => 'Existing username or email address!'
-                    );
-                }
 
-                // Validation
-                $validation = $registerAgent->validate();
-                if ($validation['success'] === false) {
-                    return $validation;
-                }
-
-                // If both username and email address are unique, create the user
-                $userInfo = $registerAgent->register();
-                return array(
-                    'success'   => true,
-                    'message'   => '',
-                    'username'  => $userInfo['username']
-                );
+                // Register
+                return json_encode($registerAgent->register());
             }
-
-            return array(
-                'success' => false,
-                'message' => 'An error occurred from the server'
-            );
         }
 
         // User login

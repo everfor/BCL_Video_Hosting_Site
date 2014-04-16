@@ -2,7 +2,7 @@
     // With love. http://webdevrefinery.com/forums/topic/3280-how-to-make-a-user-account-system/
     // Assume we have 5 tables: users, autologin, groups, forced_group_ids, and banned_emails
     class User {
-        protected $connection, $userObj, $username, $password, $salt, $email, $passHash, $ipAddress, $validation, $dateTime;
+        protected $connection, $userObj, $username, $password, $salt, $email, $passHash, $validationMsg, $ipAddress, $dateTime;
 
         public function __construct($username = '', $password = '', $email = '') {
             require_once(dirname(__FILE__) . '/../General/Connection.php');
@@ -31,33 +31,40 @@
 
         // Validility check for registration
         public function validate() {
-            $this->validation = true;
 
             if (strlen($this->username) < 5 || strlen($this->username) > 20) {
-                $this->validation = false;
-                return array(
-                    'success' => false,
-                    'message' => 'Invalid length for username. Should be 5 ~ 20 characters in length'
-                );
+                $this->validationMsg = "Invalid length for username. Should be 5 ~ 20 characters in length";
+                return false;
             }
 
             if (strlen($this->password) < 5 || strlen($this->password) > 20) {
-                $this->validation = false;
-                return array(
-                    'success' => false,
-                    'message' => 'Invalid length for password. Should be 5 ~ 20 characters in length'
-                );
+                $this->validationMsg = "Invalid length for password. Should be 5 ~ 20 characters in length";
+                return false;
             }
 
             // TODO: Validate email address
 
-            return array(
-                'success' => true
-            );
+            return true;
         }
 
         // Create a new user account
         public function register() {
+            // Check if the username already exists
+            if ($this->exists()) {
+                return array(
+                    'success' => false,
+                    'message' => 'Existing username or email address!'
+                );
+            }
+
+            // Validate input information
+            if (!$this->validate()) {
+                return array(
+                    'success' => false,
+                    'message' => $this->validationMsg
+                );
+            }
+
             // Get a $salt from the username because I am lazy lolz
             $this->salt = substr(str_shuffle($this->username), 0, 5);
             $this->passHash = md5(md5($this->salt) . md5($this->password));
@@ -79,6 +86,7 @@
             $this->connection->runUserQuery($query, $params);
 
             return array(
+                'success'   => true,
                 'username'  => $this->username
             );
         }
@@ -141,6 +149,7 @@
                 );
             }
             */
+            print_r($_SESSION);
 
             return array(
                 'success'   =>  true,
