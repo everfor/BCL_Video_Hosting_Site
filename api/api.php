@@ -34,9 +34,9 @@
                 // $POST contains username and password
                 require_once(dirname(__FILE__) . '/../lib/User/User.php');
                 $user = new User($this->request['username'], $this->request['password']);
-
+                
                 // Assume no autologin for now
-                return json_encode($user->login(false));
+                return json_encode($user->login($this->request['rememberme']));
             }
         }
 

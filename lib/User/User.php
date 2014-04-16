@@ -127,10 +127,9 @@
             $this->connection->runUserQuery($updateQuery, $updateArray);
 
             // Check autologin
-            /* NOT TESTED
             if ($remember) {
                 // Delete old cookie entry for the user
-                $delCookieQuery = 'DELETE FROM autologin WHERE user_id = :user_ud';
+                $delCookieQuery = 'DELETE FROM autologin WHERE uid = :user_ud';
                 $delCookieArray = array( ':user_id' => $this->userObj['id'] );
                 $this->connection->runUserQuery($delCookieQuery, $delCookieArray);
 
@@ -139,7 +138,7 @@
                 setcookie('public_key', $publicKey, time() + 3600 * 24 * 30);
 
                 // Create new cookie entry
-                $createCookieQuery = 'INSERT INTO autologin (user_id, public_key, private_key, created_on, last_used_on, last_used_ip)
+                $createCookieQuery = 'INSERT INTO autologin (uid, public_key, private_key, created_on, last_used_on, last_used_ip)
                                         VALUES (:user_id, :public_key, :private_key, :date_now, NULL, NULL)';
                 $createCookieArray = array(
                     ':user_id'      =>  $this->userObj['id'],
@@ -147,9 +146,8 @@
                     ':private_key'  =>  $privateKey,
                     ':date_now'     =>  date('Y-m-d H:i:s')
                 );
+                $this->connection->runUserQuery($createCookieQuery, $createCookieArray);
             }
-            */
-            print_r($_SESSION);
 
             return array(
                 'success'   =>  true,

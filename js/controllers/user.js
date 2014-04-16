@@ -8,10 +8,12 @@ main.controller('loginCntrl',
             
             $scope.submit = function() {
                 if ($scope.username && $scope.password) {
+                    $scope.autologin = ($scope.autologin === true) ? true : false;
                     
                     var userInfo = {
                         username    : $scope.username,
-                        password    : $scope.password
+                        password    : $scope.password,
+                        rememberme  : $scope.autologin
                     };
 
                     $http({method: 'POST', url: 'api/login', data: userInfo})
