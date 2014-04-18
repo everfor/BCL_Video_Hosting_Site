@@ -21,10 +21,10 @@ angular.module('main').controller('searchCntrl',
                             // Used for debugging. Will remove later
                             console.log(response);
                             if (response.success) {
-                                $scope.noResult = null;
+                                $scope.errorInfo = null;
                                 $scope.searchResult = response.result;
                             } else {
-                                $scope.noResult = "Sorry, there is no result that matches the query."
+                                $scope.errorInfo = response.message;
                             }
                         });
                 }

@@ -1,5 +1,22 @@
 var main = angular.module('main');
 
+main.controller('logoutCntrl',
+    [
+        '$scope',
+        '$http',
+        function($scope, $http) {
+
+            $scope.logout = function() {
+                $http({method: 'POST', url: '/api/logout'})
+                    .success(function(data) {
+                        // Reload page
+                        window.location.reload();
+                    });
+            }
+        }
+    ]
+);
+
 main.controller('loginCntrl',
     [
         '$scope',
@@ -16,11 +33,14 @@ main.controller('loginCntrl',
                         rememberme  : $scope.autologin
                     };
 
-                    $http({method: 'POST', url: 'api/login', data: userInfo})
+                    $http({method: 'POST', url: '/api/login', data: userInfo})
                         .success(function(data) {
                             $scope.message = 'yooooloooo!';
                             console.log(data);
                             // TODO: parse the login data
+
+                            // Reload page
+                            window.location.replace('/');
                         });
                 }
             }
@@ -43,7 +63,7 @@ main.controller('regCntrl',
                         password    : $scope.password,
                         email       : $scope.email
                     };
-                    $http({method: 'POST', url: 'api/register', data: userInfo})
+                    $http({method: 'POST', url: '/api/register', data: userInfo})
                         .success(function(data) {
                             $scope.message = 'That\'s amzing eh!';
                             console.log(data);

@@ -40,6 +40,15 @@
             }
         }
 
+        // User logout
+        protected function logout($args) {
+            if($this->method == 'POST') {
+                require_once(dirname(__FILE__) . '/../lib/User/User.php');
+                $user = new User();
+                $user->logout();
+            }
+        }
+
         // Searching function
         // Designen to realize the search of videos by both keywords and categories
         // And the searching of users

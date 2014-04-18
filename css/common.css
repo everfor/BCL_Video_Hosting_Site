@@ -38,7 +38,7 @@ body {
 
 /* Header */
 .header {
-    padding: 15px 0 20px 20px;
+    padding: 15px 20px 20px 20px;
     margin-bottom: 20px;
     border: 0;
     height: 20px;
@@ -50,6 +50,19 @@ body {
 
 .header .left {
     float: left;
+}
+
+.header .right {
+    float: right;
+}
+
+.header .user-info {
+    line-height: 30px;
+    vertical-align: middle;
+}
+
+.header .user-info #logout {
+    cursor: pointer;
 }
 
 .header .search {

@@ -9,6 +9,16 @@
         }
 
         public function searchVideoByKeywords($sentence) {
+            session_start();
+            // Check if the user is logged in
+            // If not, do not do the search and return an error
+            if (!isset($_SESSION['UID'])) {
+                return array(
+                    'success' => false,
+                    'message' => 'Content only available for logged in users'
+                );
+            }
+
             // Split the query sentence into different keywords
             $keywords = explode(" ", $sentence);
             $query = "";
@@ -46,6 +56,16 @@
         }
 
         public function searchVideoById($id) {
+            session_start();
+            // Check if the user is logged in
+            // If not, do not do the search and return an error
+            if (!isset($_SESSION['UID'])) {
+                return array(
+                    'success' => false,
+                    'message' => 'Content only available for logged in users'
+                );
+            }
+            
             $query = "SELECT * FROM videos WHERE id = {$id}";
 
             $result = $this->connection->runVideoQuery($query);

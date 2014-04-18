@@ -1,6 +1,6 @@
 <?php
     $pageTitle = 'Login Page';
-    $scripts = '<script src="js/controllers/user.js" type="text/javascript"></script>';
+    $scripts = '';
     include 'header.php';
 ?>
 

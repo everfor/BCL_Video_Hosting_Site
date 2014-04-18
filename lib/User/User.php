@@ -13,6 +13,25 @@
             $this->email    = $email;
         }
 
+        public function checkID($id) {
+            $query = 'SELECT * FROM users WHERE id = :uid';
+            $params = array( ':uid' => $id );
+
+            $result = $this->connection->runUserQuery($query, $params);
+
+            if (sizeof($result) <= 0) {
+                return array(
+                    'success' => false,
+                    'message' => 'User id does not exist'
+                );
+            }
+
+            return array(
+                'success' => true,
+                'user' => $result[0]
+            );
+        }
+
         // Check if the username or email already exists
         public function exists() {
             $query = 'SELECT * FROM users WHERE username = :username OR email LIKE :email';
@@ -131,7 +150,7 @@
             // Check autologin
             if ($remember) {
                 // Delete old cookie entry for the user
-                $delCookieQuery = 'DELETE FROM autologin WHERE uid = :user_ud';
+                $delCookieQuery = 'DELETE FROM autologin WHERE uid = :user_id';
                 $delCookieArray = array( ':user_id' => $this->userObj['id'] );
                 $this->connection->runUserQuery($delCookieQuery, $delCookieArray);
 
@@ -139,7 +158,11 @@
                 $privateKey = md5($this->userObj['salt'] . $_SERVER['HTTP_USER_AGENT']);
                 
                 // Make the cookie avaible to entire domain
-                setcookie('public_key', $publicKey, time() + 3600 * 24 * 30, "/");
+                // Note that setting cookies is tricky for localhost
+                // For real domains
+                // setcookie('public_key', $publicKey, time() + 3600 * 24 * 30, '/', $domainName);
+                // For localhsot
+                setcookie('public_key', $publicKey, time() + 3600 * 24 * 30, '/', false);
 
                 // Create new cookie entry
                 $createCookieQuery = 'INSERT INTO autologin (uid, public_key, private_key, created_on, last_used_on, last_used_ip)
@@ -159,9 +182,10 @@
             );
         }
 
-        /*
         // Log out. Remove all sessions and cookies
         public function logout() {
+            session_start();
+
             if (isset($_SESSION['UID'])) {
                 unset($_SESSION['UID']);
             }
@@ -171,7 +195,7 @@
             }
 
             if (isset($_COOKIE['public_key'])) {
-                setcookie('public_key', '', time() - 3600);
+                setcookie('public_key', null, -1, '/');
             }
         }
 
@@ -184,14 +208,17 @@
                 $auto = $this->connection->runUserQuery($query, $params);
 
                 if (sizeof($auto) > 0) {
+                    $auto = $auto[0];
                     $query = 'SELECT * FROM users WHERE id = :id';
-                    $params = array( ':id' => $auto['user_id'] );
+                    $params = array( ':id' => $auto['uid'] );
                     $this->userObj = $this->connection->runUserQuery($query, $params);
 
                     if (sizeof($this->userObj) > 0) {
+                        $this->userObj = $this->userObj[0];
                         // Check private key
                         if ($auto['private_key'] == md5($this->userObj['salt'] . $_SERVER['HTTP_USER_AGENT'])) {
                             // Log in!
+                            session_start();
                             $_SESSION['UID'] = $this->userObj['id'];
                             $_SESSION['UAGENT'] = md5($_SERVER['HTTP_USER_AGENT']);
 
@@ -207,7 +234,8 @@
                             $this->connection->runUserQuery($query, $params);
 
                             $query = 'UPDATE autologin
-                                        SET SET last_used_on = :date_now, last_used_ip = :ip';
+                                        SET last_used_on = :date_now, last_used_ip = :ip
+                                        WHERE uid = :user_id';
                             $this->connection->runUserQuery($query, $params);
 
                             return array(
@@ -223,6 +251,6 @@
                 'message'   =>  'No cookie detected'
             );
         }
-        */
+
     }
 ?>
