@@ -110,6 +110,8 @@
                 );
             }
 
+            // Do not forget to start the session here!
+            session_start();
             // Set a user id in session variable
             $_SESSION['UID'] = $this->userObj['id'];
             $_SESSION['UAGENT'] = md5($_SERVER['HTTP_USER_AGENT']);
@@ -135,7 +137,9 @@
 
                 $publicKey = md5($this->userObj['username'] . date('Y-m-d H:i:s'));
                 $privateKey = md5($this->userObj['salt'] . $_SERVER['HTTP_USER_AGENT']);
-                setcookie('public_key', $publicKey, time() + 3600 * 24 * 30);
+                
+                // Make the cookie avaible to entire domain
+                setcookie('public_key', $publicKey, time() + 3600 * 24 * 30, "/");
 
                 // Create new cookie entry
                 $createCookieQuery = 'INSERT INTO autologin (uid, public_key, private_key, created_on, last_used_on, last_used_ip)
