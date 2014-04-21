@@ -10,7 +10,7 @@
 }
 
 .wrapper .side {
-	width: 26%;
+	width: 30%;
 }
 
 .wrapper .side .caption h3 {
@@ -46,9 +46,8 @@
 	clear: both;
 } 
 
-.wrapper .side .video-list .video-list-detail span {
-	float: left;
-	display: inline-block;
+.wrapper .side .video-list .video-list-detail div {
+	display: inline;
 }
 
 .wrapper .side .video-list .video-list-detail .video-list-preview img {

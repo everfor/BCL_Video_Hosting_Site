@@ -16,12 +16,12 @@
 				<li ng-repeat="rec in recommendations">
 					<a target="_parent" ng-href="/watch/{{rec.id}}">
 						<span class="video-list-detail">
-							<span class="video-list-preview">
+							<div class="video-list-preview">
 								<img ng-src="{{trustSrc(rec.thumbnail)}}">
-							</span>
-							<span class="video-list-title">
+							</div>
+							<div class="video-list-title">
 								{{rec.title}}
-							</span>
+							</div>
 						</span>
 					</a>
 				</li>
