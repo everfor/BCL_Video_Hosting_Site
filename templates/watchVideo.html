@@ -13,26 +13,14 @@
 				</h3>
 			</div>
 			<ul class="video-list">
-				<li>
-					<a>
+				<li ng-repeat="rec in recommendations">
+					<a target="_parent" ng-href="/watch/{{rec.id}}">
 						<span class="video-list-detail">
 							<span class="video-list-preview">
-								<img src="//i1.ytimg.com/vi/nucAlZfND6c/default.jpg">
+								<img ng-src="{{trustSrc(rec.thumbnail)}}">
 							</span>
 							<span class="video-list-title">
-								Test Video Name
-							</span>
-						</span>
-					</a>
-				</li>
-				<li>
-					<a>
-						<span class="video-list-detail">
-							<span class="video-list-preview">
-								<img src="//i1.ytimg.com/vi/nucAlZfND6c/default.jpg">
-							</span>
-							<span class="video-list-title">
-								Test Video Name
+								{{rec.title}}
 							</span>
 						</span>
 					</a>

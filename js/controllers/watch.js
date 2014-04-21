@@ -20,7 +20,9 @@ angular.module('main').controller('watchCntrl',
                                 $scope.videoResult = response.result;
 
                                 $scope.videoPlayer = 'http://player.vimeo.com/video/' 
-                                                    + $scope.videoResult[0].vimeo_id;
+                                                    + $scope.videoResult.vimeo_id;
+
+                                $scope.recommendations = response.recommendations;
                             }
                         });
                 }

@@ -84,8 +84,91 @@
 
             return array(
                 'success'   =>  true,
-                'result'    =>  $result
+                'result'    =>  $result[0],
+                'recommendations' => $this->getSimilarVideos($id)
             );
+        }
+
+        public function getSimilarVideos($id) {
+            $ids = $this->getSimilarVideoIds($id);
+
+            $query = "";
+            $params = array();
+            foreach ($ids as $index => $id) {
+                if ($index === 0) {
+                    $placeholder = ":" . md5($id);
+                    $query = $query . "SELECT * FROM videos WHERE id = {$placeholder}";
+                    $params[$placeholder] = $id;
+                } else {
+                    $placeholder = ":" . md5($id);
+                    $query = $query . " OR id = {$placeholder}";
+                    $params[$placeholder] = $id;
+                }
+            }
+
+            $videos = $this->connection->runVideoQuery($query, $params);
+
+            // Get the thumbnail of all results
+            foreach ($videos as $index => $item) {
+                $vimeo_response = json_decode(file_get_contents("http://vimeo.com/api/v2/video/" . $item['vimeo_id'] . ".json"));
+                $videos[$index]['thumbnail'] = $vimeo_response[0]->thumbnail_medium;
+                unset($videos[$index]['vimeo_id']);
+            }
+
+            return $videos;
+        }
+
+        public function getSimilarVideoIds($id) {
+            $categories = $this->getCategories($id);
+
+            if ($categories == null) {
+                return null;
+            }
+
+            $query = "";
+            $params = array();
+            foreach ($categories as $index => $cid) {
+                if ($index === 0) {
+                    $placeholder = ":" . md5($cid);
+                    $query = $query . "SELECT DISTINCT vid FROM video_category_map WHERE (cid = {$placeholder}";
+                    $params[$placeholder] = $cid;
+                } else {
+                    $placeholder = ":" . md5($cid);
+                    $query = $query . " OR cid = {$placeholder}";
+                    $params[$placeholder] = $cid;
+                }
+            }
+
+            // Limit 5 similar videos only for now
+            $query = $query . ") AND vid <> :self LIMIT 5";
+            $params[':self'] = $id;
+
+            $similarVideoIds = $this->connection->runVideoQuery($query, $params);
+
+            // Parse the array
+            foreach ($similarVideoIds as $index => $vid) {
+                $similarVideoIds[$index] = $vid['vid'];
+            }
+
+            return $similarVideoIds;
+        }
+
+        public function getCategories($id) {
+            $query = "SELECT cid FROM video_category_map WHERE vid = :id";
+            $params = array( ":id" => $id );
+
+            $result = $this->connection->runVideoQuery($query, $params);
+
+            if (sizeof($result) <= 0) {
+                return null;
+            }
+
+            // Parse cid array
+            foreach ($result as $index => $cid) {
+                $result[$index] = $cid['cid'];
+            }
+
+            return $result;
         }
 
         /*
