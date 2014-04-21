@@ -22,18 +22,23 @@
             // Split the query sentence into different keywords
             $keywords = explode(" ", $sentence);
             $query = "";
+            $params = array();
 
-            // Add all keywords search using union
-            // TODO: There's a bug as :var should not contain numbers
+            // Add all keywords search
             foreach ($keywords as $index => $keyword) {
+                $placeholder = ":" . md5($keyword);
                 if ($index === 0) {
-                    $query = $query . "SELECT * FROM videos WHERE title LIKE \"%{$keyword}%\"";
+                    $query = $query . "SELECT * FROM videos WHERE title LIKE {$placeholder}";
                 } else {
-                    $query = $query . " AND title LIKE \"%{$keyword}%\"";
+                    if (!array_key_exists($placeholder, $params)) {
+                        $query = $query . " AND title LIKE {$placeholder}";
+                    }
                 }
+
+                $params[$placeholder] = "%" . $keyword . "%";
             }
             
-            $result = $this->connection->runVideoQuery($query);
+            $result = $this->connection->runVideoQuery($query, $params);
 
             if (sizeof($result) <= 0) {
                 return array(
